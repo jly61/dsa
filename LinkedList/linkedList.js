@@ -40,16 +40,15 @@ class LinkedList {
     insert(element, index){
         if (index >= 0 && index < this.count) {
             const node = new Node(element);
-            console.log(node)
             if (index === 0) {
-                node.next = this.head
+                node.next = this.head;
                 this.head = node
             } else {
                 const preElement = this.getElementAt(index - 1);
                 node.next = preElement.next;
                 preElement.next = node
             }
-            this.count++
+            this.count++;
             return true
         }
         return false
@@ -120,17 +119,99 @@ class LinkedList {
     }
 }
 
-const linkedList = new LinkedList()
-linkedList.push(10)
-linkedList.push(15)
-linkedList.push(20)
-// console.log(linkedList.head)
-// console.log(linkedList.getElementAt(3))
-// console.log(linkedList.removeAt(1))
-console.log(linkedList.insert(16, 2))
-console.log('----')
-console.log(linkedList.head)
-console.log(linkedList.indexOf(16))
-console.log(linkedList.remove(16))
-console.log(linkedList.head)
-console.log(linkedList.toString())
+const linkedList = new LinkedList();
+linkedList.push(10);
+linkedList.push(15);
+linkedList.push(20);
+// console.log(linkedList.head);
+// console.log(linkedList.getElementAt(3));
+// console.log(linkedList.removeAt(1));
+console.log(linkedList.insert(16, 2));
+console.log('----');
+console.log(linkedList.head);
+console.log(linkedList.indexOf(16));
+console.log(linkedList.remove(16));
+console.log(linkedList.head);
+console.log(linkedList.toString());
+
+// 双向链表，指向前一个节点和后一个节点
+class DoublyNode extends Node {
+    constructor(element, next, prev) {
+        super(element, next);
+        this.prev = prev
+    }
+
+}
+class DoublyLinkedList extends LinkedList {
+    constructor() {
+        super();
+        this.tail = undefined  // 保留对最后一个元素的引用
+    }
+    insert(element, index) {
+        if (index >= 0 && index <= this.count) {
+            const node = new DoublyNode(element);
+            let current = this.head;
+            if (index === 0) {
+                if (this.head === null) {
+                    this.head = node;
+                    this.tail = this.head
+                } else {
+                    current.prev = node;
+                    node.next = current;
+                    this.head = node
+
+                }
+            } else if (index === this.count) {  // 最后一项
+                current = this.tail;
+                current.next = node;
+                node.prev = current;
+                this.tail = node;
+            } else {
+                const preElement = this.getElementAt(index - 1);  // 获取要插入位置的前一个元素
+                const current = preElement.next;
+                node.prev = preElement;
+                node.next = current;
+                preElement.next = node;
+                current.prev = node
+            }
+            this.count++;
+            return true;
+        }
+        return false;
+    }
+    removeAt(index) {
+        if (index >= 0 &&  index < this.count) {
+            let current = this.head;
+            if (index === 0) {
+                this.head = current.next;
+                if (this.count === 1) {
+                    this.tail = undefined
+                } else {
+                    this.head.prev = undefined
+                }
+            } else if (index === this.count - 1) {
+                current = this.tail;
+                this.tail = current.prev;
+                this.tail.next = undefined;
+            } else {
+                current = this.getElementAt(index);
+                const preElement = current.prev
+                preElement.next = current.next;
+                current.next.prev = preElement
+            }
+            this.count--;
+            return current.element
+        }
+        return undefined
+    }
+}
+
+console.log('------双向链表')
+const doublyList = new DoublyLinkedList();
+doublyList.insert(5, 0);
+doublyList.insert(3, 0);
+doublyList.insert(9, 2);
+doublyList.insert(7, 2);
+console.log(doublyList.head);
+console.log(doublyList.removeAt(2));
+console.log(doublyList.head);
