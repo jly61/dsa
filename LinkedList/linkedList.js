@@ -54,7 +54,7 @@ class LinkedList {
         return false
     }
     getElementAt(index){
-        if( index >= 0 && index < this.count) {
+        if( index >= 0 && index <= this.count) {
             let current = this.head;
             for (let i = 0; i < index; i++) {
                 current = current.next
@@ -79,7 +79,7 @@ class LinkedList {
     }
     // 关键：将前一元素指针指向current(要删除元素)指针指向的节点
     removeAt(index){
-        if (index >=0 && index < this.count) {
+        if (index >= 0 && index < this.count) {
             let current = this.head;
             if (index === 0) {
                 this.head = current.next
@@ -215,3 +215,67 @@ doublyList.insert(7, 2);
 console.log(doublyList.head);
 console.log(doublyList.removeAt(2));
 console.log(doublyList.head);
+
+// 循环链表
+class CircularList extends LinkedList {
+    constructor() {
+        super();
+    }
+    insert(element, index) {
+        if (index >= 0 && index <= this.count) {
+            const node = new Node(element);
+            let current = this.head;
+            if (index === 0) {
+                if (this.head == null) {
+                    this.head = node;
+                    node.next = this.head
+                } else {
+                    const lastElement = this.getElementAt(this.size());  // 获取最后一个元素
+                    node.next = current;
+                    this.head = node;
+                    lastElement.next = this.head
+                }
+            } else {
+                const preElement = this.getElementAt(index - 1);
+                node.next = preElement.next;
+                preElement.next = node
+            }
+            this.count++;
+            return true
+        }
+        return false
+    }
+    removeAt(index) {
+        if (index >= 0 && index < this.count) {
+            let current = this.head;
+            if (index === 0) {
+                if (this.size() === 1) {
+                    this.head  = undefined
+                } else {
+                    const removed = this.head;
+                    current = this.getElementAt(this.size());
+                    this.head = this.head.next;
+                    current.next = this.head;
+                    current = removed;
+                }
+            } else {
+                const preElement = this.getElementAt(index - 1)
+                current = preElement.next
+                preElement.next = current.next
+            }
+            this.count--;
+            return current.element
+        }
+        return undefined
+    }
+}
+console.log('----循环链表')
+const circularList = new CircularList();
+circularList.insert(5, 0);
+circularList.insert(10, 1);
+circularList.insert(15, 2);
+// circularList.insert(3, 0);
+// circularList.insert(15, 3);
+console.log(circularList.head);
+console.log(circularList.toString());
+console.log(circularList.removeAt(3))
