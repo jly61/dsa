@@ -8,12 +8,12 @@
  size()：返回栈里的元素个数。该方法和数组的 length 属性很类似。
 * */
 
-const _item = Symbol('stackObject')
+const _item = Symbol('stackObject');
 
 class Stack {
     constructor() {
         this.count = 0;
-        this.item = {}
+        this.item = {};
         this[_item] = []
     }
     push(element) {
@@ -45,9 +45,9 @@ class Stack {
         if(this.isEmpty()) {
             return ''
         }
-        let str = `${this.item[0]}`
+        let str = `${this.item[0]}`;
         for (let i = 1; i < this.count; i++) {
-            console.log(str)
+            console.log(str);
             str = `${str},${this.item[i]}`
         }
         return str
@@ -55,23 +55,23 @@ class Stack {
 }
 Stack.prototype.print = function () {
     console.log(this.item)
-}
-const stack = new Stack()
-stack.push('a')
-stack.push('b')
-stack.push('c')
-stack.print()
+};
+const stack = new Stack();
+stack.push('a');
+stack.push('b');
+stack.push('c');
+stack.print();
 stack.pop();
-stack.print()
-console.log(stack.peek())
-console.log(stack.isEmpty())
+stack.print();
+console.log(stack.peek());
+console.log(stack.isEmpty());
 // stack.clear()
 // stack.print()
-console.log(stack.size())
-console.log(stack.toString())
+console.log(stack.size());
+console.log(stack.toString());
 
-console.log(Object.keys(stack))
-console.log(Object.getOwnPropertyNames(stack))
+console.log(Object.keys(stack));
+console.log(Object.getOwnPropertyNames(stack));
 /**
  * 封装私有变量方法
  * 1. Symbol假私有，可以通过Object.getOwnPropertySymbols()获取

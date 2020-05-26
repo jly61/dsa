@@ -1,11 +1,11 @@
-// 实现链表类
+// 实现链表类,相比数组,无需移动元素便可以添加、移除元素
 /*
  push(element)：向链表尾部添加一个新元素。
- insert(element, position)：向链表的特定位置插入一个新元素。
+ insert(element, index)：向链表的特定位置插入一个新元素。
  getElementAt(index)：返回链表中特定位置的元素。如果链表中不存在这样的元素，则返回 undefined。
  remove(element)：从链表中移除一个元素。
  indexOf(element)：返回元素在链表中的索引。如果链表中没有该元素则返回-1。
- removeAt(position)：从链表的特定位置移除一个元素。
+ removeAt(index)：从链表的特定位置移除一个元素。
  isEmpty()：如果链表中不包含任何元素，返回 true，如果链表长度大于 0则返回 false。
  size()：返回链表包含的元素个数，与数组的 length 属性类似。
  getHead()：获取头部元素。
@@ -38,7 +38,7 @@ class LinkedList {
         this.count++
     }
     insert(element, index){
-        if (index >= 0 && index < this.count) {
+        if (index >= 0 && index <= this.count) {
             const node = new Node(element);
             if (index === 0) {
                 node.next = this.head;
@@ -64,7 +64,7 @@ class LinkedList {
         return undefined
     }
     remove(element){
-        const index = this.indexOf(element)
+        const index = this.indexOf(element);
         return this.removeAt(index)
     }
     indexOf(element){
@@ -195,7 +195,7 @@ class DoublyLinkedList extends LinkedList {
                 this.tail.next = undefined;
             } else {
                 current = this.getElementAt(index);
-                const preElement = current.prev
+                const preElement = current.prev;
                 preElement.next = current.next;
                 current.next.prev = preElement
             }
@@ -206,7 +206,7 @@ class DoublyLinkedList extends LinkedList {
     }
 }
 
-console.log('------双向链表')
+console.log('------双向链表');
 const doublyList = new DoublyLinkedList();
 doublyList.insert(5, 0);
 doublyList.insert(3, 0);
@@ -259,8 +259,8 @@ class CircularList extends LinkedList {
                     current = removed;
                 }
             } else {
-                const preElement = this.getElementAt(index - 1)
-                current = preElement.next
+                const preElement = this.getElementAt(index - 1);
+                current = preElement.next;
                 preElement.next = current.next
             }
             this.count--;
@@ -269,7 +269,7 @@ class CircularList extends LinkedList {
         return undefined
     }
 }
-console.log('----循环链表')
+console.log('----循环链表');
 const circularList = new CircularList();
 circularList.insert(5, 0);
 circularList.insert(10, 1);
@@ -278,4 +278,41 @@ circularList.insert(15, 2);
 // circularList.insert(15, 3);
 console.log(circularList.head);
 console.log(circularList.toString());
-console.log(circularList.removeAt(3))
+console.log(circularList.removeAt(3));
+
+// 有序链表
+class SortedLinkedList extends LinkedList {
+    constructor() {
+        super();
+    }
+    insert(element, index = 0) {
+        if (this.isEmpty()) {
+            return super.insert(element, 0)
+        } else {
+            let current = this.head;
+            const size = this.size();
+            for (let i = 0; i < size; i++) {
+                if (element > this.getElementAt(size - 1).element) {
+                    super.insert(element, size);
+                    return i
+                }
+                if (element <= current.element) {
+                    const index = this.indexOf(current.element);
+                    super.insert(element, index);
+                    return i
+                }
+                current = current.next;
+            }
+        }
+    }
+}
+
+console.log('----有序链表');
+const sortedList = new SortedLinkedList();
+sortedList.insert(5);
+sortedList.insert(3);
+sortedList.insert(7);
+console.log(sortedList.head);
+
+const stack = new DoublyLinkedList()
+console.log(Array.isArray(stack))

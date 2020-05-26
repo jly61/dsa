@@ -32,15 +32,15 @@ class Stack {
 }
 Stack.prototype.print = function () {
     console.log(this.item)
-}
-const stack = new Stack()
-stack.push(1)
-stack.push(3)
-stack.print()
-stack.pop()
-stack.print()
-console.log(stack.peek())
-console.log(stack.isEmpty())
-stack.clear()
-stack.print()
-console.log(stack.size())
+};
+const stack = new Stack();
+stack.push(1);
+stack.push(3);
+stack.print();
+stack.pop();
+stack.print();
+console.log(stack.peek());
+console.log(stack.isEmpty());
+stack.clear();
+stack.print();
+console.log(stack.size());

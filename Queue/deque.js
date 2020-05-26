@@ -23,7 +23,7 @@ export class Deque {
             for (let i = this.count; i > 0; i--) {
                 this.item[i] = this.item[i - 1]
             }
-            this.item[0] = element
+            this.item[0] = element;
             this.count++;
         }
     }
@@ -35,9 +35,9 @@ export class Deque {
         if(this.isEmpty()) {
             return undefined
         }
-        const result = this.item[this.lowerCount]
-        delete this.item[this.lowerCount]
-        this.lowerCount++
+        const result = this.item[this.lowerCount];
+        delete this.item[this.lowerCount];
+        this.lowerCount++;
         return result
     }
     removeBack() {
@@ -71,7 +71,7 @@ export class Deque {
         if (this.isEmpty()) {
             return ''
         }
-        let str = `${this.item[this.lowerCount]}`
+        let str = `${this.item[this.lowerCount]}`;
         for (let i = this.lowerCount + 1; i < this.count; i++) {
             str = `${str},${this.item[i]}`
         }
@@ -80,19 +80,19 @@ export class Deque {
 }
 Deque.prototype.print = function () {
     console.log(this.item)
-}
+};
 
-const deque = new Deque()
-deque.addFront('a')
-deque.addFront('b')
-deque.addFront('c')
-deque.addFront('d')
-deque.print()
-console.log(deque.toString())
-console.log(deque.size())
-console.log(deque.isEmpty())
-console.log(deque.peekFront())
-console.log(deque.peekBack())
-console.log(deque.removeBack())
-console.log(deque.removeFront())
-deque.print()
+const deque = new Deque();
+deque.addFront('a');
+deque.addFront('b');
+deque.addFront('c');
+deque.addFront('d');
+deque.print();
+console.log(deque.toString());
+console.log(deque.size());
+console.log(deque.isEmpty());
+console.log(deque.peekFront());
+console.log(deque.peekBack());
+console.log(deque.removeBack());
+console.log(deque.removeFront());
+deque.print();

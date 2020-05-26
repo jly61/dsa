@@ -24,14 +24,14 @@ function hotPotato(elements, num) {
     }
 }
 
-const names = ['小一', '小二', '小三', '小四', '小五']
+const names = ['小一', '小二', '小三', '小四', '小五'];
 // console.log(hotPotato(names, 7))
 
 /**
  * 回文检查器, 大小写敏感, 判断第一位与最后一位是否相等
  * @param str
  */
-console.log('-------回文检查器')
+console.log('-------回文检查器');
 function palindromeChecker(str) {
     if (!str) {
         return false
@@ -42,7 +42,7 @@ function palindromeChecker(str) {
     for (let i = 0; i < str.length; i++) {
         deque.addBack(str.charAt(i));
     }
-    deque.print()
+    deque.print();
     while(deque.size() > 1 && flag) {
         firstElement = deque.removeFront();
         lastElement = deque.removeBack();
@@ -54,4 +54,4 @@ function palindromeChecker(str) {
 }
 
 const str = 'abccba';
-console.log(palindromeChecker(str))
+console.log(palindromeChecker(str));

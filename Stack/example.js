@@ -9,9 +9,9 @@ function decimalToBinary(decNumber, hex) {
     const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let arr = [];
     while(decNumber !== 0) {
-        arr.push(digits.charAt(decNumber % hex))
+        arr.push(digits.charAt(decNumber % hex));
         decNumber = Math.floor(decNumber / hex)
     }
     return arr.reverse().join('')
 }
-console.log(decimalToBinary(1000, 62))
+console.log(decimalToBinary(1000, 62));

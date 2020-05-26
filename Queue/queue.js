@@ -22,9 +22,9 @@ export class Queue {
         if(this.isEmpty()) {
             return undefined
         }
-        const result = this.item[this.lowerCount]
-        delete this.item[this.lowerCount]
-        this.lowerCount++
+        const result = this.item[this.lowerCount];
+        delete this.item[this.lowerCount];
+        this.lowerCount++;
         return result
     }
     peek() {
@@ -46,7 +46,7 @@ export class Queue {
         if (this.isEmpty()) {
             return ''
         }
-        let str = `${this.item[this.lowerCount]}`
+        let str = `${this.item[this.lowerCount]}`;
         for (let i = this.lowerCount + 1; i < this.count; i++) {
             str = `${str},${this.item[i]}`
         }
@@ -55,16 +55,16 @@ export class Queue {
 }
 Queue.prototype.print = function () {
     console.log(this.item)
-}
+};
 
-const queue = new Queue()
-queue.enqueue('a')
-queue.enqueue('b')
-queue.enqueue('c')
-queue.print()
-queue.dequeue()
-queue.print()
-console.log(queue.peek())
-console.log(queue.isEmpty())
-console.log(queue.size())
-console.log(queue.toString())
+const queue = new Queue();
+queue.enqueue('a');
+queue.enqueue('b');
+queue.enqueue('c');
+queue.print();
+queue.dequeue();
+queue.print();
+console.log(queue.peek());
+console.log(queue.isEmpty());
+console.log(queue.size());
+console.log(queue.toString());
